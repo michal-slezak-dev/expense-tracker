@@ -24,3 +24,6 @@ Nowoczesne API do zarządzania wydatkami domowymi. Projekt skupia się na wykorz
 ├── Dockerfile           # Budowanie obrazu Pythona
 ├── docker-compose.yml   # Orkiestracja API i bazy Postgres
 └── requirements.txt     # sqlmodel, fastapi, uvicorn, psycopg2-binary
+
+
+![alt text](endpoints.svg)

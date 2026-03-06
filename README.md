@@ -15,15 +15,15 @@ Nowoczesne API do zarządzania wydatkami domowymi. Projekt skupia się na wykorz
 ```text
 .
 ├── app/
-│   ├── main.py          # Inicjalizacja apki i włączenie routerów
-│   ├── database.py      # Konfiguracja silnika (Engine) i sesji
-│   ├── models.py        # Definicje klas SQLModel (Table + Schemas)
+│   ├── main.py          
+│   ├── database.py      
+│   ├── models.py        
 │   └── routers/
-│       ├── expenses.py  # Obsługa wydatków
-│       └── categories.py# Obsługa kategorii
-├── Dockerfile           # Budowanie obrazu Pythona
-├── docker-compose.yml   # Orkiestracja API i bazy Postgres
-└── requirements.txt     # sqlmodel, fastapi, uvicorn, psycopg2-binary
+│       ├── expenses.py  
+│       └── categories.py
+├── Dockerfile           
+├── docker-compose.yml   
+└── requirements.txt     
 
 ```
 

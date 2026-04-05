@@ -43,4 +43,27 @@ async def get_categories(session : Session = Depends(get_Session)):
     return categories
 
 # update category
+@router.put('/category/{category_id}', response_model=CategoryResponse)
+async def update_category(category_id : int, new_name : str, session : Session = Depends(get_Session)):
+    category = session.get(Category, category_id)
+    if not category:
+        raise HTTPException(status_code=404, detail='Category not found')
+
+    category.name = new_name
+    session.add(category)
+    session.commit()
+
+    return category
+    
+
 # delete category
+@router.delete('/category/{category_id}')
+async def delete_category(category_id : int, session : Session = Depends(get_Session)):
+    category = session.get(Category, category_id)
+    if not category:
+        raise HTTPException(status_code=404, detail='Category not found')
+    
+    session.delete(category)
+    session.commit()
+
+    return {}

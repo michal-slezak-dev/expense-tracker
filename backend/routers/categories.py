@@ -29,8 +29,7 @@ async def create_category(category_request : CreateCategory, session : Session =
         return category
 
     except Exception as e:
-        session.delete(category)
-        session.commit()
+        session.rollback()
         raise HTTPException(status_code=500, detail=str(e))
 
 

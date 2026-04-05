@@ -12,7 +12,7 @@ class User(SQLModel, table=True):
     email : str = Field(unique=True, nullable=False)
     password_hash : str = Field(nullable=False)
     created_at : datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-    updated_at : datetime = Field(default=None)
+    updated_at : Optional[datetime] = Field(default=None)
 
     expenses : List['Expense'] = Relationship(back_populates='user')
 
@@ -32,7 +32,7 @@ class Expense(SQLModel, table=True):
     updated_at : Optional[datetime] = Field(default=None)
 
     category_id : Optional[int] = Field(default=None, foreign_key='category.id', ondelete='SET NULL')
-    user_id : int = Field(foreign_key='user.id')
+    user_id : int = Field(foreign_key='user.id', ondelete='CASCADE')
 
     category : Optional[Category] = Relationship(back_populates='expenses')
     user : User = Relationship(back_populates='expenses')

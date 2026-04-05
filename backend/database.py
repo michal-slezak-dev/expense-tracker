@@ -1,8 +1,6 @@
 from sqlmodel import SQLModel, create_engine, Session
-import os
 
 postgres_url = 'postgresql+psycopg2://postgres:postgres@localhost:5432/expense_tracker'
-
 engine = create_engine(postgres_url, echo=True)
 
 def create_db_and_tables():

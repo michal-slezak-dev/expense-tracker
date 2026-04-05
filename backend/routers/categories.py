@@ -3,7 +3,7 @@ from database import get_Session
 from pydantic import BaseModel
 from typing import List, Optional
 from sqlmodel import Session, select
-from models import Category
+from models import Category, User
 
 router = APIRouter(prefix="/categories", tags=["categories"])
 
@@ -67,3 +67,18 @@ async def delete_category(category_id : int, session : Session = Depends(get_Ses
     session.commit()
 
     return {}
+
+
+# seed endpoint... 1 user - hardcoded
+@router.post('/seed')
+async def seed(session : Session = Depends(get_Session)):
+    user = User(
+        username='test',
+        email='test@gmail.com',
+        password_hash='test_hash'
+    )
+
+    session.add(user)
+    session.commit()
+
+    return {'message': 'Test user added successfully'}

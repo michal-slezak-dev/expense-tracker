@@ -4,8 +4,9 @@ from typing import List, Optional
 from sqlmodel import Session, Field, select
 from datetime import date
 from database import get_Session
+from services.expense_service import calculate_expense_summary 
 from models import Expense, Category, User
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 router = APIRouter(prefix="/expenses", tags=["expenses"])
 
@@ -81,3 +82,15 @@ async def delete_expense(expense_id : int, session : Session = Depends(get_Sessi
     return {}
 
 # get expense summary
+@router.get('/summary')
+def get_expense_summary(session : Session = Depends(get_Session)):
+    """
+    Get monthly expense summary (base) regardless of user_id (for now)
+    """
+    interval = datetime.now(timezone.utc) - timedelta(days=30)
+    statement = select(Expense).where(Expense.expense_date >= interval)
+    
+    expenses = session.exec(statement).all()
+
+    return calculate_expense_summary(expenses)
+    

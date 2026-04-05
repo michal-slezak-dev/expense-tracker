@@ -25,6 +25,7 @@ class Category(SQLModel, table=True):
 
 class Expense(SQLModel, table=True):
     id : Optional[int] = Field(default=None, primary_key=True)
+    name : str = Field(nullable=False, unique=True)
     amount : float = Field(default=0, decimal_places=2)
     description : Optional[str] = Field(default=None)
     expense_date : date = Field(default_factory=date.today)
